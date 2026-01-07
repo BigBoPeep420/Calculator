@@ -20,7 +20,7 @@ body {
     display: flex;
     flex-direction: column;
 }
-.header {
+.main .header {
     background: linear-gradient(to bottom, rgb(20,20,20), rgb(36, 36, 36));
     border-radius: 20px 20px 0px 0px;
     display: flex;
@@ -110,7 +110,7 @@ body {
 .clear {
     width: calc((100% - 20px) / 4);
 }
-.fncAdd {
+.fncEdit {
     width: 70px;
 }
 .fnc1, .fnc2, .fnc3 {
@@ -172,4 +172,21 @@ body {
 }
 .rightBank .add, .rightBank .equal {
     height: 40%;
+}
+.modal .fncEdit {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 300px;
+
+    background-color: #999999;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+}
+.fncEdit .show {
+    transform: translateY(0);
 }

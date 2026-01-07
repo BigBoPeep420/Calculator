@@ -1,6 +1,6 @@
-const MAX_CHARS = 14;
 const keys = document.querySelector('.buttons');
 const display = document.querySelector('.display');
+const fncEditModal = document.querySelector('.modal .fncEdit');
 
 class Calculator{
     constructor(displayDiv) {
@@ -26,23 +26,21 @@ class Calculator{
     areInputsEmpty() {
         return { inputA: !this.inputA, inputB: !this.inputB, op: !this.op };
     };
-    displayOutput(str) {
-        if(str.length > MAX_CHARS) {
-            this.display.textContent = '..' + str.slice(-(MAX_CHARS - 2));
-        } else this.display.textContent = str;
-    };
+    updateDisplay() {
+        const MAX_CHARS = 14;
+        let txt = this.inputB || this.inputA || '0';
+        if(this.op && !this.inputB) txt = this.inputA;
+        if(txt.length > MAX_CHARS) txt = '..' + txt.slice(-(MAX_CHARS - 2));
+        this.display.textContent = txt;
+    }
     inputNum(str) {
         const empties = this.areInputsEmpty();
         if(empties.op) {
-            if(this.display.textContent.length < MAX_CHARS) {
-                this.inputA += str;
-                this.displayOutput(this.inputA);
-            }
+            this.inputA += str;
+            this.updateDisplay();
         } else {
-            if(this.display.textContent.length < MAX_CHARS) {
-                this.inputB += str;
-                this.displayOutput(this.inputB);
-            }
+            this.inputB += str;
+            this.updateDisplay();
         }
     };
     inputOp(str) {
@@ -52,17 +50,24 @@ class Calculator{
             this.op = str;
         } else {
             this.op = str;
-            this.displayOutput(this.op);
+            this.updateDisplay();
         }
         
     };
     calculate() {
-        if(parseFloat(this.inputA) == NaN) return; //Add error for CANNOT PARSE INPUT A
-        if(parseFloat(this.inputB) == NaN) return; //Add error for CANNOT PARSE INPUT B
-        if(!(this.op in this.methods)) return; //Add error for NO SUCH METHOD IMPLEMENTED
-        const numA = parseFloat(this.inputA); const numB = parseFloat(this.inputB);
-        this.inputA = this.methods[this.op](numA, numB); this.inputB = ''; this.op = '';
-        this.displayOutput(this.inputA);
+        if(!this.inputA || !this.op || !this.inputB) return;
+        const numA = parseFloat(this.inputA) || 0;
+        const numB = parseFloat(this.inputB) || 0;
+        if(this.op in this.methods) {
+            const result = this.methods[this.op](numA, numB);
+            this.inputA = result.toString();
+            this.inputB = ''; this.op = '';
+            this.updateDisplay();
+            return result;
+        }else {
+            this.inputA = ''; this.inputB =''; this.op = '';
+            this.display.textContent = "No Fn";
+        }
     };
     clear() {
         this.inputA = ''; this.inputB = ''; this.op = '';
@@ -70,18 +75,14 @@ class Calculator{
     };
     delete() {
         const empties = this.areInputsEmpty();
-        if(empties.inputA) {
-            // Empty, do nothing
-        } else if((!empties.inputA) && (empties.inputB && empties.op)){
-            this.inputA = this.display.textContent.slice(0, -1);
-            this.displayOutput(this.inputA);
-        } else if(!empties.inputA && empties.inputB && empties.op){
-            this.inputB = this.display.textContent.slice(0, -1);
-            this.displayOutput(this.inputB);
-        } else {
+        if(!empties.inputB) {
+            this.inputB = this.inputB.slice(0, -1);
+        }else if(!empties.op) {
             this.op = '';
-            this.displayOutput(this.inputA);
-        };
+        }else if(!empties.inputA) {
+            this.inputA = this.inputA.slice(0, -1);
+        }
+        this.updateDisplay();
     };
 };
 
@@ -103,6 +104,9 @@ keys.addEventListener('click', e => {
     };
     if (e.target.dataset.action == 'equal'){
         kowlkulater.calculate();
-    }
+    };
+    if (e.target.dataset.action == 'fncEdit'){
+        fncEditModal.classList.add('show');
+    };
 
 });
