@@ -98,8 +98,8 @@ body {
     height: 10%;
     width: 400px;
     display: flex;
-    align-items: center;
     margin: 20px 0px 20px 0px;
+    gap: 12px;
     justify-content: space-between;
 }
 .functions .key {
@@ -108,10 +108,10 @@ body {
     letter-spacing: 2px;
 }
 .clear {
-    width: 100px;
+    width: calc((100% - 20px) / 4);
 }
 .fncAdd {
-    width: 75px;
+    width: 70px;
 }
 .fnc1, .fnc2, .fnc3 {
     width: 60px;
@@ -123,7 +123,6 @@ body {
 }
 .key {
     box-sizing: border-box;
-    margin: 0;
     display: block;
     border-radius: 8px;
 
