@@ -110,10 +110,10 @@ body {
 .clear {
     width: calc((100% - 20px) / 4);
 }
-.fncEdit {
+.fn {
     width: 70px;
 }
-.fnc1, .fnc2, .fnc3 {
+.f1, .f2, .f3 {
     width: 60px;
 }
 .keys{
@@ -173,20 +173,226 @@ body {
 .rightBank .add, .rightBank .equal {
     height: 40%;
 }
-.modal .fncEdit {
+#fncEdit {
     position: fixed;
     bottom: 0;
     left: 0;
 
     width: 100%;
-    height: 300px;
+    height: 500px;
 
     background-color: #999999;
     box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
 
-    transform: translateY(100%);
+    transform: translateY(00%);
     transition: transform 0.3s ease-out;
+
+    display: flex;
+    flex-direction: column;
 }
-.fncEdit .show {
+.fncEdit.show {
     transform: translateY(0);
+}
+.fncEdit.header{
+    display: flex;
+    height: 75px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 40px;
+    background: 
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.144), rgb(0, 0, 0)),
+        linear-gradient(to top, rgba(0, 0, 0, 0.144), rgb(0, 0, 0));
+    outline: solid 5px rgb(0, 0, 0);
+    box-shadow: 0px 10px 10px 5px rgba(0, 0, 0, 0.747);
+}
+.fncEdit.header .title{
+    font-size: 30px;
+    font-weight: 900;
+    background: linear-gradient( to bottom,
+        #ff8800 0%, 
+        #b46000 30%, 
+        #ff8800 50%, 
+        #b46000 80%, 
+        #ff8800 100% );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(5px 5px 2px rgb(0, 0, 0));
+}
+.fncEdit.header > .close{
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 4px;
+    border-radius: 50%;
+    background-color: rgb(20,20,20);
+    box-shadow: 1px 4px 2px 3px rgb(0, 0, 0);
+    border: outset 1px rgba(131, 131, 131, 0.336);
+    background: linear-gradient( to bottom,
+        #ff8800 0%, 
+        #b46000 30%, 
+        #ff8800 50%, 
+        #b46000 80%, 
+        #ff8800 100% );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    cursor: pointer;
+}
+.fncEdit.header>.close:active{
+    border: inset 1px rgba(131, 131, 131, 0.336);
+    translate: 1px 1px;
+    box-shadow: 0px 2px 2px 2px rgb(0, 0, 0);
+}
+.fncEdit .body{
+    display: flex;
+    justify-content: center;
+    padding: 20px 20px 20px 20px;
+    align-items: center;
+    flex-grow: 1;
+}
+.fncEdit .information{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+    width: 100%;
+    padding-right: 20px;
+}
+.fncEdit .inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.dropdown::picker-icon{
+    margin: 0px;
+    padding: 0px 5px 3px 0px;
+    content: "☠";
+    font-size: 2rem;
+    font-weight: 500;
+}
+.dropdown {
+    appearance: base-select;
+    background: rgb(20,20,20);
+    color: #b46000;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    padding: 4px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.dropdown:open{
+    border-radius: 0px 0px 10px 10px;
+}
+.selectedcontent {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+.selectedcontent .option-label{
+    margin-left: auto;
+    margin-right: auto;
+}
+.dropdown select:open{
+    border-radius: 0px 0px 10px 10px;
+}
+::picker(select) {
+    appearance: base-select;
+    padding: 0px;
+    border-radius: 10px 10px 0px 0px;
+    background: rgb(20, 20, 20);
+    color: #b46000;
+    border: none;
+}
+select option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 45px;
+    color: #b46000;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 100;
+    padding: 0px 15px;
+}
+select:hover{
+    background: repeating-radial-gradient(farthest-corner, #361d00, rgb(20,20,20));
+}
+select option:hover{
+    background: repeating-radial-gradient(farthest-corner, #361d00, rgb(20,20,20));
+}
+option::checkmark{
+    order: 1;
+    content: "☠";
+    font-size: 2rem;
+    padding-bottom: 5px;
+    font-weight: 500;
+}
+.icon{
+    width: 30px;
+    text-align: center;
+    font-weight: 1000;
+    font-size: 22px;
+    justify-self: center;
+    padding-bottom: 1px;
+}
+.fncEdit .expression{
+    box-sizing: border-box;
+    width: 400px;
+    height: 230px;
+    padding: 15px;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 0px;
+    background-color: rgb(20, 20, 20);
+    color: #b46000;
+}
+.expression::placeholder{
+    color: #b46000;
+}
+.expression:focus{ outline: none;}
+.fncEdit .footer{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    height: 65px;
+    padding-right: 20px;
+    background: 
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.144), rgb(0, 0, 0)),
+        linear-gradient(to top, rgba(0, 0, 0, 0.144), rgb(0, 0, 0));
+    box-shadow: 0px -5px 10px 5px rgba(0, 0, 0, 0.747);
+    outline: solid 5px rgb(0, 0, 0);
+}
+.fncEdit .footer .submit {
+    padding: 7px 15px;
+    border-radius: 20px;
+    font-size: 20px;
+    background: linear-gradient( to bottom,
+        #ff8800 0%, 
+        #b46000 30%, 
+        #ff8800 50%, 
+        #b46000 80%, 
+        #ff8800 100% );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-color: rgb(20,20,20);
+    box-shadow: 1px 4px 2px 3px rgb(0, 0, 0);
+    border: outset 1px rgba(131, 131, 131, 0.336);
+    cursor: pointer;
+}
+.fncEdit .footer .submit:active{
+    border: inset 1px rgba(131, 131, 131, 0.336);
+    translate: 1px 1px;
+    box-shadow: 0px 2px 2px 2px rgb(0, 0, 0);
 }

@@ -20,15 +20,15 @@
             <p class="model">T-4200</p>
         </div>
 
-        <div class="display"></div>
+        <div class="display">0</div>
 
         <div class="buttons">
             <div class="functions">
                 <button class="key clear" data-action="clear">Clr</button>
-                <button class="key fncEdit" data-action="fncEdit">Fn</button>
-                <button class="key fnc1" data-action="fnc1">F1</button>
-                <button class="key fnc2" data-action="fnc2">F2</button>
-                <button class="key fnc3" data-action="fnc3">F3</button>
+                <button class="key fn" data-action="fncEdit">Fn</button>
+                <button class="key f1" data-action="fnc1">F1</button>
+                <button class="key f2" data-action="fnc2">F2</button>
+                <button class="key f3" data-action="fnc3">F3</button>
             </div>
             <div class="keys">
                 <div class="leftBank">
@@ -58,13 +58,31 @@
     </div>
 
 
-    <div class="modal fncEdit">
+    <div class="modal fncEdit" id="fncEdit">
         <div class="fncEdit header">
             <p class="title">Edit Custom Functions</p>
             <button class="close">&times;</button>
         </div>
-        <div class="fncEdit body"></div>
-        <div class="fncEdit footer">
+        <div class="body">
+            <div class="information">
+                    <p>Here you can enter your own custom expression and map it to one of the F buttons.<p>
+                    <p>If an F button is already mapped to an expression it will be overwritten.<p>
+                    <p>Your expression must take two inputs (a and b) and return a number.<p>
+            </div>
+            <div class="inputs">
+                <select name="functionButtons" class="dropdown">
+                    <button><selectedcontent class="selectedcontent"></selectedcontent></button>
+                    <option value="f1"><span class="icon" aria-hidden="true">F1</span>
+                    <span class="option-label">Function Button 1</span></option>
+                    <option value="f2"><span class="icon" aria-hidden="true">F2</span>
+                    <span class="option-label">Function Button 2</span></option>
+                    <option value="f3"><span class="icon" aria-hidden="true">F3</span>
+                    <span class="option-label">Function Button 3</span></option>
+                </select>
+                <textarea name="expression" class="expression" placeholder="Expression" minlength="1"></textarea>
+            </div>
+        </div>
+        <div class="footer">
             <button class="submit">Confirm</button>
         </div>
     </div>

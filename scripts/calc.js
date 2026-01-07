@@ -1,6 +1,6 @@
 const keys = document.querySelector('.buttons');
 const display = document.querySelector('.display');
-const fncEditModal = document.querySelector('.modal .fncEdit');
+const fncEditModal = document.querySelector('.fncEdit');
 
 class Calculator{
     constructor(displayDiv) {
@@ -45,6 +45,7 @@ class Calculator{
     };
     inputOp(str) {
         const empties = this.areInputsEmpty();
+        if (empties.inputA) return;
         if(!empties.inputA && !empties.op && !empties.inputB) {
             this.calculate();
             this.op = str;
@@ -59,7 +60,12 @@ class Calculator{
         const numA = parseFloat(this.inputA) || 0;
         const numB = parseFloat(this.inputB) || 0;
         if(this.op in this.methods) {
-            const result = this.methods[this.op](numA, numB);
+            let result = this.methods[this.op](numA, numB);
+            if(!Number.isFinite(result)){
+                this.clear();
+                this.display.textContent = "Error";
+            }
+            result = Math.round(result * 1000000000) / 1000000000;
             this.inputA = result.toString();
             this.inputB = ''; this.op = '';
             this.updateDisplay();
@@ -71,16 +77,18 @@ class Calculator{
     };
     clear() {
         this.inputA = ''; this.inputB = ''; this.op = '';
-        this.display.textContent = '';
+        this.display.textContent = '0';
     };
     delete() {
         const empties = this.areInputsEmpty();
         if(!empties.inputB) {
             this.inputB = this.inputB.slice(0, -1);
+            if(this.inputB == '-') this.inputB = '';
         }else if(!empties.op) {
             this.op = '';
         }else if(!empties.inputA) {
             this.inputA = this.inputA.slice(0, -1);
+            if(this.inputA == '-') this.inputA = '';
         }
         this.updateDisplay();
     };
@@ -88,6 +96,12 @@ class Calculator{
 
 const kowlkulater = new Calculator(display);
 
+window.addEventListener('click', e => {
+    const inside = e.target.closest('fncEdit');
+    if(fncEditModal.classList.contains('show') && inside){
+        fncEditModal.classList.remove('show');
+    }
+});
 keys.addEventListener('click', e => {
     if (!e.target.classList.contains('key')) return; // Didn't click a button
     if (e.target.classList.contains('op')){
@@ -108,5 +122,4 @@ keys.addEventListener('click', e => {
     if (e.target.dataset.action == 'fncEdit'){
         fncEditModal.classList.add('show');
     };
-
 });
