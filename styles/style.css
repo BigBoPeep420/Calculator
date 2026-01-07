@@ -1,0 +1,158 @@
+* {
+    margin-inline-start: 0; padding-inline-start: 0; padding: 0; margin: 0;
+    font-family: Orbitron, monospace;
+}
+body {
+    background-color: rgb(20,20,20);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main {
+    background-color: rgb(36, 36, 36);
+    height: 700px;
+    width: 500px;
+    box-shadow: 0px 0px 50px 20px black;
+    border-radius: 20px;
+    outline: solid 5px black;
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    background: linear-gradient(to bottom, rgb(20,20,20), rgb(36, 36, 36));
+    border-radius: 20px 20px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+
+    font-size: 22px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 105, 5, 0.75);
+
+}
+.header .brand, .header .model {
+    letter-spacing: 3px;
+    background: linear-gradient( to bottom,
+        #ff8800 0%, 
+        #b46000 30%, 
+        #ff8800 50%, 
+        #b46000 80%, 
+        #ff8800 100% );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0px 1px 0px rgba(0,0,0,0.5));
+}
+.header .brand {
+    font-style: italic;
+}
+.display {
+    margin: 0px auto;
+    width: 90%;
+    height: 120px;
+
+    background: linear-gradient(to bottom, rgba(107, 107, 107, 0.541) 0%, rgba(0, 0, 0, 0.651) 50%);
+    box-shadow: inset 0px 0px 30px black;
+    border: 3px solid rgba(14, 13, 13, 0.1);
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px 10px 10px 0px;
+
+    font-family: 'VT323', monospace;
+    font-size: 80px;
+    font-weight: 900;
+    color: #fda500;
+    text-shadow: 
+        0px 0px 5px rgb(253, 165, 0),
+        0px 0px 20px hsl(36, 100%, 70%);
+    position: relative;
+    overflow: hidden;
+    line-height: 0.3;
+}
+.display::after {
+    content: " ";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(rgba(0,0,0,1) 50%, transparent 50%),
+        linear-gradient(90deg, rgba(0,0,0,1) 50%, transparent 50%);
+    background-size: 2px 2px;
+    opacity: 0.6;
+}
+.buttons {
+    height: 100%;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.functions {
+    height: 10%;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    margin: 20px 0px 20px 0px;
+    justify-content: space-between;
+}
+.functions .key {
+    font-size: 20px;
+    padding: 5px 20px;
+    letter-spacing: 2px;
+}
+.keys{
+    display: flex;
+    height: 430px;
+    width: 400px;
+}
+.key {
+    box-sizing: border-box;
+    margin: 0;
+    display: block;
+    border-radius: 8px;
+
+    background-color: rgb(15, 15, 15);
+    border: outset 2px rgba(0,0,0,1);
+    box-shadow: 
+        inset 0px 0px 10px rgb(0, 0, 0),
+        0px 0px 15px 3px rgb(0, 0, 0);
+
+    font-size: 28px;
+    font-weight: 700;
+    color: #ff88008a;
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.8);
+    font-family: Orbitron;
+}
+.leftBank {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 75%;
+    margin-right: 10px;
+}
+.leftBank .key {
+    width: calc((100% - 20px) / 3);
+}
+.leftBank .zero {
+    width: calc(((100% - 20px) / 3) * 2 + 10px);
+}
+.rightBank {
+    display: flex;
+    width: 23%;
+    flex-direction: column;
+    gap: 10px;
+}
+.rightBank .key {
+    width: 100%;
+    height: 19%;
+}
+.rightBank .add, .rightBank .equal {
+    height: 40%;
+}
