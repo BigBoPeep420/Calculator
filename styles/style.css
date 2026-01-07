@@ -1,6 +1,7 @@
 * {
     margin-inline-start: 0; padding-inline-start: 0; padding: 0; margin: 0;
     font-family: Orbitron, monospace;
+    user-select: none;
 }
 body {
     background-color: rgb(20,20,20);
@@ -63,7 +64,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 0px 10px 10px 0px;
+    padding: 0px 5px 10px 5px;
 
     font-family: 'VT323', monospace;
     font-size: 80px;
@@ -103,8 +104,17 @@ body {
 }
 .functions .key {
     font-size: 20px;
-    padding: 5px 20px;
+    height: 45px;
     letter-spacing: 2px;
+}
+.clear {
+    width: 100px;
+}
+.fncAdd {
+    width: 75px;
+}
+.fnc1, .fnc2, .fnc3 {
+    width: 60px;
 }
 .keys{
     display: flex;
@@ -128,6 +138,14 @@ body {
     color: #ff88008a;
     text-shadow: 0px 1px 2px rgba(0,0,0,0.8);
     font-family: Orbitron;
+    cursor: pointer;
+}
+.key:active{
+    border-style: inset;
+    transform: translate(-1px, -1px);
+    box-shadow: 
+        inset 0px 0px 10px rgb(0, 0, 0),
+        0px 0px 5px 1px rgb(0, 0, 0);
 }
 .leftBank {
     display: flex;
