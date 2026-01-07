@@ -184,13 +184,13 @@ body {
     background-color: #999999;
     box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
 
-    transform: translateY(00%);
+    transform: translateY(100%);
     transition: transform 0.3s ease-out;
 
     display: flex;
     flex-direction: column;
 }
-.fncEdit.show {
+#fncEdit.show {
     transform: translateY(0);
 }
 .fncEdit.header{
@@ -395,4 +395,14 @@ option::checkmark{
     border: inset 1px rgba(131, 131, 131, 0.336);
     translate: 1px 1px;
     box-shadow: 0px 2px 2px 2px rgb(0, 0, 0);
+}
+#alert {
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+
+    display: flex;
+    flex-direction: column;
+}
+#alert.show {
+    transform: translateY(0);
 }

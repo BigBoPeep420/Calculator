@@ -1,6 +1,10 @@
 const keys = document.querySelector('.buttons');
 const display = document.querySelector('.display');
-const fncEditModal = document.querySelector('.fncEdit');
+const fncEditModal = document.querySelector('#fncEdit');
+const fncEditClose = document.querySelector('#fncClose');
+const fncEditConfirm = document.querySelector('#fncConfirm');
+const fncDropdown = document.querySelector('#fncSelect');
+const fncExpression = document.querySelector('#fncExpression');
 
 class Calculator{
     constructor(displayDiv) {
@@ -92,34 +96,79 @@ class Calculator{
         }
         this.updateDisplay();
     };
+    getMethodString(key) {
+        if(!(key in this.methods)) return '';
+        let str = this.methods[key].toString();
+        return str;
+    };
 };
 
 const kowlkulater = new Calculator(display);
 
-window.addEventListener('click', e => {
-    const inside = e.target.closest('fncEdit');
-    if(fncEditModal.classList.contains('show') && inside){
-        fncEditModal.classList.remove('show');
+
+
+keys.addEventListener('click', e => {
+    const target = e.target;
+    const action = e.target.dataset.action;
+    const content = e.target.textContent;
+
+    if(!target.classList.contains('key')) return;
+    switch(action){
+        case 'clear': 
+            kowlkulater.clear();
+            break;
+        case 'del':
+            kowlkulater.delete();
+            break;
+        case 'equal':
+            kowlkulater.calculate();
+            break;
+        case 'fncEdit':
+            e.stopPropagation();
+            fncDropdown.dispatchEvent(new Event('change'));
+            fncEditModal.classList.add('show');
+            break;
+        case 'F1':
+            
+            break;
+        case 'F2':
+
+            break;
+        case 'F3':
+
+            break;
+        default:
+            if(target.classList.contains('op')){
+                kowlkulater.inputOp(action);
+            }else if(target.classList.contains('num')){
+                kowlkulater.inputNum(action);
+            }
     }
 });
-keys.addEventListener('click', e => {
-    if (!e.target.classList.contains('key')) return; // Didn't click a button
-    if (e.target.classList.contains('op')){
-        kowlkulater.inputOp(e.target.dataset.action);
-    };
-    if (e.target.classList.contains('num')){
-        kowlkulater.inputNum(e.target.textContent);
-    };
-    if (e.target.dataset.action == 'clear'){
-        kowlkulater.clear();
-    };
-    if (e.target.dataset.action == 'del'){
-        kowlkulater.delete();
-    };
-    if (e.target.dataset.action == 'equal'){
-        kowlkulater.calculate();
-    };
-    if (e.target.dataset.action == 'fncEdit'){
-        fncEditModal.classList.add('show');
+
+fncEditClose.addEventListener('click', () => fncEditModal.classList.remove('show'));
+window.addEventListener('click', e => {
+    if(e.target === fncEditModal) {
+        fncEditModal.classList.remove('show');
     };
 });
+fncEditConfirm.addEventListener('click', e => {
+    const selectedF = fncDropdown.value;
+    const custExpress = fncExpression.value;
+
+    try {
+        const newMethod = new Function('a', 'b', `return (${custExpress})(a, b)`);
+        kowlkulater.registerMethod(selectedF, newMethod);
+        fncEditModal.classList.remove('show');
+        //-------------------------
+        //  Add success alert here
+        //-------------------------
+    } catch (err) {
+        //-------------------------
+        //  Add failure alert here
+        //-------------------------
+    };
+});
+fncDropdown.addEventListener('change', e => {
+    fncExpression.value = kowlkulater.getMethodString(e.target.value);
+})

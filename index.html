@@ -35,16 +35,16 @@
                     <button class="key del" data-action="del">Del</button>
                     <button class="key divide op" data-action="/">/</button>
                     <button class="key multiply op" data-action="*">*</button>
-                    <button class="key seven num" data-action="seven">7</button>
-                    <button class="key eight num" data-action="eight">8</button>
-                    <button class="key nine num" data-action="nine">9</button>
-                    <button class="key four num" data-action="four">4</button>
-                    <button class="key five num" data-action="five">5</button>
-                    <button class="key six num" data-action="six">6</button>
-                    <button class="key one num" data-action="one">1</button>
-                    <button class="key two num" data-action="two">2</button>
-                    <button class="key three num" data-action="three">3</button>
-                    <button class="key zero num" data-action="zero">0</button>
+                    <button class="key seven num" data-action="7">7</button>
+                    <button class="key eight num" data-action="8">8</button>
+                    <button class="key nine num" data-action="9">9</button>
+                    <button class="key four num" data-action="4">4</button>
+                    <button class="key five num" data-action="5">5</button>
+                    <button class="key six num" data-action="6">6</button>
+                    <button class="key one num" data-action="1">1</button>
+                    <button class="key two num" data-action="2">2</button>
+                    <button class="key three num" data-action="3">3</button>
+                    <button class="key zero num" data-action="0">0</button>
                     <button class="key period" data-action="period">.</button>
                 </div>
                 <div class="rightBank">
@@ -61,7 +61,7 @@
     <div class="modal fncEdit" id="fncEdit">
         <div class="fncEdit header">
             <p class="title">Edit Custom Functions</p>
-            <button class="close">&times;</button>
+            <button class="close" id="fncClose" data-action="closeFncEdit">&times;</button>
         </div>
         <div class="body">
             <div class="information">
@@ -70,23 +70,28 @@
                     <p>Your expression must take two inputs (a and b) and return a number.<p>
             </div>
             <div class="inputs">
-                <select name="functionButtons" class="dropdown">
+                <select name="functionButtons" class="dropdown" id="fncSelect">
                     <button><selectedcontent class="selectedcontent"></selectedcontent></button>
-                    <option value="f1"><span class="icon" aria-hidden="true">F1</span>
+                    <option value="F1"><span class="icon" aria-hidden="true">F1</span>
                     <span class="option-label">Function Button 1</span></option>
-                    <option value="f2"><span class="icon" aria-hidden="true">F2</span>
+                    <option value="F2"><span class="icon" aria-hidden="true">F2</span>
                     <span class="option-label">Function Button 2</span></option>
-                    <option value="f3"><span class="icon" aria-hidden="true">F3</span>
+                    <option value="F3"><span class="icon" aria-hidden="true">F3</span>
                     <span class="option-label">Function Button 3</span></option>
                 </select>
-                <textarea name="expression" class="expression" placeholder="Expression" minlength="1"></textarea>
+                <textarea id="fncExpression" class="expression" placeholder="Expression" minlength="1"></textarea>
             </div>
         </div>
         <div class="footer">
-            <button class="submit">Confirm</button>
+            <button class="submit" id="fncConfirm">Confirm</button>
         </div>
     </div>
 
+    <div class="modal alert" id="alert">
+        <span class="alert icon">⁉</span>
+        <p id="alertText">Default Text</p>
+        <button id="alertDismiss" data-action="dismiss">❌</button>
+    </div>
 
 </body>
 </html>
