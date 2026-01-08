@@ -45,7 +45,7 @@
                     <button class="key two num" data-action="2">2</button>
                     <button class="key three num" data-action="3">3</button>
                     <button class="key zero num" data-action="0">0</button>
-                    <button class="key period" data-action="period">.</button>
+                    <button class="key period num" data-action=".">.</button>
                 </div>
                 <div class="rightBank">
                     <button class="key subtract op" data-action="-">-</button>
@@ -67,7 +67,8 @@
             <div class="information">
                     <p>Here you can enter your own custom expression and map it to one of the F buttons.<p>
                     <p>Your expression evaluates two variables (a and b) and returns a number.
-                        Use standard operators and do not include a return statement. There's a simple example below.<p>
+                        Use standard operators and do not include a return statement. Use by pushing the corresponding
+                        F button in place of an operator. There's a simple example below.<p>
                     <p class="expressionExample"><span id="code">(a + 23) - b</span> returns 28 if a=10 and b=5<p>
             </div>
             <div class="inputs">
@@ -84,6 +85,7 @@
             </div>
         </div>
         <div class="footer">
+            <button id="testExpression"><span>Test</span></button>
             <button class="submit" id="fncConfirm">Confirm</button>
         </div>
     </div>

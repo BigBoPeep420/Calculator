@@ -379,15 +379,16 @@ option::checkmark{
 .expression:focus{ outline: none;}
 .fncEdit .footer{
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: center;
     height: 65px;
-    padding-right: 20px;
+    width: 100%;
     background: 
         linear-gradient(to bottom, rgba(0, 0, 0, 0.144), rgb(0, 0, 0)),
         linear-gradient(to top, rgba(0, 0, 0, 0.144), rgb(0, 0, 0));
     box-shadow: 0px -5px 10px 5px rgba(0, 0, 0, 0.747);
     outline: solid 5px rgb(0, 0, 0);
+
 }
 .fncEdit .footer .submit {
     padding: 7px 15px;
@@ -405,9 +406,44 @@ option::checkmark{
     box-shadow: 1px 4px 2px 3px rgb(0, 0, 0);
     border: outset 1px rgba(131, 131, 131, 0.336);
     cursor: pointer;
+    margin-right: 40px;
 }
 .fncEdit .footer .submit:active, #alertDismiss:active{
     border: inset 1px rgba(131, 131, 131, 0.336);
+    translate: 1px 1px;
+    box-shadow: 0px 2px 2px 2px rgb(0, 0, 0);
+}
+#testExpression{
+    margin: auto;
+    padding: 7px 15px;
+    border-radius: 15px;
+    box-shadow: 1px 4px 2px 3px rgb(0, 0, 0);
+    border: outset 1px rgba(131, 131, 131, 0.336);
+    cursor: pointer;
+    position: relative;
+    isolation: isolate;
+    background: radial-gradient(closest-side, rgb(20,20,20) 80%, rgb(20, 20, 20) 150%);
+}
+#testExpression.pass{
+    background: radial-gradient(closest-side, rgb(20,20,20) 80%, rgb(20, 200, 20) 150%);
+}
+#testExpression.fail{
+    background: radial-gradient(closest-side, rgb(20,20,20) 80%, rgb(200,20,20) 150%);
+}
+#testExpression span{
+    font-size: 20px;
+    background: linear-gradient( to bottom,
+        #ff8800 0%, 
+        #b46000 30%, 
+        #ff8800 50%, 
+        #b46000 80%, 
+        #ff8800 100% );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+#testExpression:active{
+    border: outset 1px rgba(131, 131, 131, 0.336);
     translate: 1px 1px;
     box-shadow: 0px 2px 2px 2px rgb(0, 0, 0);
 }

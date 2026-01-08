@@ -6,6 +6,7 @@ const fncEditConfirm = document.querySelector('#fncConfirm');
 const fncDropdown = document.querySelector('#fncSelect');
 const fncExpression = document.querySelector('#fncExpression');
 const alertModal = document.querySelector('#alert');
+const testExpBtn = document.querySelector('#testExpression');
 let alertTimeout = null;
 
 class Calculator{
@@ -24,7 +25,10 @@ class Calculator{
     };
 
     registerMethod(sym, fn) {
-        this.methods[sym] = fn;
+        try{
+            fn(1,1);
+            this.methods[sym] = fn;
+        } catch{}
     };
     areInputsEmpty() {
         return { inputA: !this.inputA, inputB: !this.inputB, op: !this.op };
@@ -34,14 +38,18 @@ class Calculator{
         let txt = this.inputB || this.inputA || '0';
         if(this.op && !this.inputB) txt = this.inputA;
         if(txt.length > MAX_CHARS) txt = '..' + txt.slice(-(MAX_CHARS - 2));
+        if (txt.startsWith('.')) txt = 0 + txt;
         this.display.textContent = txt;
     }
     inputNum(str) {
         const empties = this.areInputsEmpty();
         if(empties.op) {
+            if(str == '.' && this.inputA.endsWith('.')) return;
             this.inputA += str;
             this.updateDisplay();
         } else {
+            const lastChar = this.inputB.charAt(this.inputB.length - 1);
+            if(str == '.' && this.inputB.endsWith('.')) return;
             this.inputB += str;
             this.updateDisplay();
         }
@@ -122,7 +130,7 @@ function hideAlert(){
 
 
 const kowlkulater = new Calculator(display);
-const keyInput = {
+const keyboardInput = {
     '0': () => kowlkulater.inputNum('0'),
     '1': () => kowlkulater.inputNum('1'),
     '2': () => kowlkulater.inputNum('2'),
@@ -140,6 +148,7 @@ const keyInput = {
     '/': () => kowlkulater.inputOp('/'),
     '.': () => kowlkulater.inputNum('.'),
     'Backspace': () => kowlkulater.delete(),
+    'SBackspace': () => kowlkulater.clear(),
 };
 
 
@@ -191,6 +200,7 @@ fncEditConfirm.addEventListener('click', e => {
         const newMethod = new Function('a', 'b', `return ${custExpress};`);
         kowlkulater.registerMethod(selectedF, newMethod);
         fncEditModal.classList.remove('show');
+        kowlkulater.methods[selectedF](1,1);
 
         showAlert('Custom Function Saved!', '✔');
     } catch (err) {
@@ -207,8 +217,22 @@ window.addEventListener('keydown', e => {
     if(document.activeElement.tagName == 'INPUT' || 
         document.activeElement.tagName == 'TEXTAREA') return;
     const action = keyboardInput[e.key];
-    if(action){
+    if(e.key == 'Backspace' && e.shiftKey){
+        keyboardInput['SBackspace']();
+    }else if(action){
         e.preventDefault();
         action();
-    }
+    };
 });
+testExpBtn.addEventListener('click', () => {
+    try{
+        const exp = new Function('a', 'b', `return ${fncExpression.value};`);
+        exp(2, 5);
+        document.querySelector('#testExpression').classList.add('pass');
+        document.querySelector('#testExpression').classList.remove('fail');
+
+    }catch{
+        document.querySelector('#testExpression').classList.remove('pass');
+        document.querySelector('#testExpression').classList.add('fail');
+    }
+})
