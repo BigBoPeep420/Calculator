@@ -5,6 +5,7 @@ const fncEditClose = document.querySelector('#fncClose');
 const fncEditConfirm = document.querySelector('#fncConfirm');
 const fncDropdown = document.querySelector('#fncSelect');
 const fncExpression = document.querySelector('#fncExpression');
+const alertModal = document.querySelector('#alert');
 let alertTimeout = null;
 
 class Calculator{
@@ -119,8 +120,27 @@ function hideAlert(){
     alertTimeout = null;
 }
 
-const kowlkulater = new Calculator(display);
 
+const kowlkulater = new Calculator(display);
+const keyInput = {
+    '0': () => kowlkulater.inputNum('0'),
+    '1': () => kowlkulater.inputNum('1'),
+    '2': () => kowlkulater.inputNum('2'),
+    '3': () => kowlkulater.inputNum('3'),
+    '4': () => kowlkulater.inputNum('4'),
+    '5': () => kowlkulater.inputNum('5'),
+    '6': () => kowlkulater.inputNum('6'),
+    '7': () => kowlkulater.inputNum('7'),
+    '8': () => kowlkulater.inputNum('8'),
+    '9': () => kowlkulater.inputNum('9'),
+    'Enter': () => kowlkulater.calculate(),
+    '+': () => kowlkulater.inputOp('+'),
+    '-': () => kowlkulater.inputOp('-'),
+    '*': () => kowlkulater.inputOp('*'),
+    '/': () => kowlkulater.inputOp('/'),
+    '.': () => kowlkulater.inputNum('.'),
+    'Backspace': () => kowlkulater.delete(),
+};
 
 
 keys.addEventListener('click', e => {
@@ -157,7 +177,6 @@ keys.addEventListener('click', e => {
             }
     }
 });
-
 fncEditClose.addEventListener('click', () => fncEditModal.classList.remove('show'));
 window.addEventListener('click', e => {
     if(e.target === fncEditModal) {
@@ -180,4 +199,16 @@ fncEditConfirm.addEventListener('click', e => {
 });
 fncDropdown.addEventListener('change', e => {
     fncExpression.value = kowlkulater.getMethodString(e.target.value);
-})
+});
+alertModal.addEventListener('click', (e) => {
+    if(e.target.id == 'alertDismiss') alertModal.classList.remove('show');
+});
+window.addEventListener('keydown', e => {
+    if(document.activeElement.tagName == 'INPUT' || 
+        document.activeElement.tagName == 'TEXTAREA') return;
+    const action = keyboardInput[e.key];
+    if(action){
+        e.preventDefault();
+        action();
+    }
+});

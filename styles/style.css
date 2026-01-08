@@ -3,6 +3,9 @@
     font-family: Orbitron, monospace;
     user-select: none;
 }
+*:focus{
+    outline: none;
+}
 body {
     background-color: rgb(20,20,20);
     height: 100vh;
@@ -177,16 +180,12 @@ body {
     position: fixed;
     bottom: 0;
     left: 0;
-
     width: 100%;
     height: 500px;
-
     background-color: #999999;
     box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
-
     transform: translateY(100%);
     transition: transform 0.3s ease-out;
-
     display: flex;
     flex-direction: column;
 }
