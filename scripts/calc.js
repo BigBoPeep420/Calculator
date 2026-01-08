@@ -39,7 +39,7 @@ class Calculator{
         if(this.op && !this.inputB) txt = this.inputA;
         if(txt.length > MAX_CHARS) txt = '..' + txt.slice(-(MAX_CHARS - 2));
         if (txt.startsWith('.')) txt = 0 + txt;
-        if (txt == 'Infinity') txt = 'Inf';
+        if (txt == 'Infinity') txt = '800815';
         this.display.textContent = txt;
     }
     inputNum(str) {
