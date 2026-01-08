@@ -5,6 +5,7 @@ const fncEditClose = document.querySelector('#fncClose');
 const fncEditConfirm = document.querySelector('#fncConfirm');
 const fncDropdown = document.querySelector('#fncSelect');
 const fncExpression = document.querySelector('#fncExpression');
+let alertTimeout = null;
 
 class Calculator{
     constructor(displayDiv) {
@@ -22,10 +23,7 @@ class Calculator{
     };
 
     registerMethod(sym, fn) {
-        if((sym.length === 1) || (sym.length === 2)){
-            this.methods[sym] = fn;
-        };
-        // Add Error for OPERATOR TOO SHORT OR LONG
+        this.methods[sym] = fn;
     };
     areInputsEmpty() {
         return { inputA: !this.inputA, inputB: !this.inputB, op: !this.op };
@@ -99,9 +97,27 @@ class Calculator{
     getMethodString(key) {
         if(!(key in this.methods)) return '';
         let str = this.methods[key].toString();
+        str = str.trim();
+        str = str.replaceAll('function anonymous(a,b\n)', '');
+        str = str.replaceAll(' {\n', '');
+        str = str.replaceAll('return ', '');
+        str = str.replaceAll(';\n}', '');
         return str;
     };
 };
+
+function showAlert(txt, icon = "⁉", duration = 5000){
+    const alertModal = document.getElementById('alert');
+    alertModal.querySelector('#alertText').textContent = txt;
+    alertModal.querySelector('#alertIcon').textContent = icon;
+    if(alertTimeout) {clearTimeout(alertTimeout)};
+    alertModal.classList.add('show');
+    alertTimeout = setTimeout(() => {hideAlert();}, duration);
+}
+function hideAlert(){
+    document.getElementById('alert').classList.remove('show');
+    alertTimeout = null;
+}
 
 const kowlkulater = new Calculator(display);
 
@@ -128,14 +144,10 @@ keys.addEventListener('click', e => {
             fncDropdown.dispatchEvent(new Event('change'));
             fncEditModal.classList.add('show');
             break;
-        case 'F1':
-            
-            break;
-        case 'F2':
-
-            break;
-        case 'F3':
-
+        case 'fnc1':
+        case 'fnc2':
+        case 'fnc3':
+            kowlkulater.inputOp(action);
             break;
         default:
             if(target.classList.contains('op')){
@@ -157,16 +169,13 @@ fncEditConfirm.addEventListener('click', e => {
     const custExpress = fncExpression.value;
 
     try {
-        const newMethod = new Function('a', 'b', `return (${custExpress})(a, b)`);
+        const newMethod = new Function('a', 'b', `return ${custExpress};`);
         kowlkulater.registerMethod(selectedF, newMethod);
         fncEditModal.classList.remove('show');
-        //-------------------------
-        //  Add success alert here
-        //-------------------------
+
+        showAlert('Custom Function Saved!', '✔');
     } catch (err) {
-        //-------------------------
-        //  Add failure alert here
-        //-------------------------
+        showAlert('Custom Function Not Valid!', '🛑');
     };
 });
 fncDropdown.addEventListener('change', e => {

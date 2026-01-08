@@ -258,9 +258,26 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    text-align: center;
     height: 90%;
     width: 100%;
     padding-right: 20px;
+}
+.information p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+}
+.expressionExample{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.expressionExample #code{
+    font-family: monospace;
+    background-color: rgb(121, 120, 120);
+    padding: 5px 15px;
+    font-size: 20px;
 }
 .fncEdit .inputs {
     display: flex;
@@ -386,23 +403,63 @@ option::checkmark{
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    background-color: rgb(20,20,20);
     box-shadow: 1px 4px 2px 3px rgb(0, 0, 0);
     border: outset 1px rgba(131, 131, 131, 0.336);
     cursor: pointer;
 }
-.fncEdit .footer .submit:active{
+.fncEdit .footer .submit:active, #alertDismiss:active{
     border: inset 1px rgba(131, 131, 131, 0.336);
     translate: 1px 1px;
     box-shadow: 0px 2px 2px 2px rgb(0, 0, 0);
 }
 #alert {
-    transform: translateY(100%);
-    transition: transform 0.3s ease-out;
-
+    transform: translateY(-100%);
+    transition: transform 0.8s ease-out;
+    position: fixed;
+    top: 0;
+    height: 40px;
+    width: 70%;
+    border-radius: 0px 0px 15px 15px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background: linear-gradient(to bottom, 
+    rgb(20, 20, 20),
+    rgb(43, 43, 43),
+    rgb(20, 20, 20));
 }
 #alert.show {
     transform: translateY(0);
+    box-shadow: 0px 5px 20px rgb(0, 0, 0);
+    outline: solid 3px rgb(0, 0, 0);
+}
+#alertIcon{
+    font-size: 35px;
+    font-weight: 1000;
+    text-shadow: 3px 3px rgb(0, 0, 0);
+    color: #b46000;
+}
+#alertText{
+    color: #b46000;
+    font-size: 20px;
+    font-weight: 900;
+    text-shadow: 3px 3px rgb(0, 0, 0);
+}
+#alertDismiss{
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 10px;
+    background: linear-gradient( to bottom,
+        #ff8800 0%, 
+        #b46000 30%, 
+        #ff8800 50%, 
+        #b46000 80%, 
+        #ff8800 100% );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    box-shadow: 1px 4px 2px 3px rgb(0, 0, 0);
+    border: outset 1px rgba(131, 131, 131, 0.336);
+    cursor: pointer;
 }

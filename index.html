@@ -66,17 +66,18 @@
         <div class="body">
             <div class="information">
                     <p>Here you can enter your own custom expression and map it to one of the F buttons.<p>
-                    <p>If an F button is already mapped to an expression it will be overwritten.<p>
-                    <p>Your expression must take two inputs (a and b) and return a number.<p>
+                    <p>Your expression evaluates two variables (a and b) and returns a number.
+                        Use standard operators and do not include a return statement. There's a simple example below.<p>
+                    <p class="expressionExample"><span id="code">(a + 23) - b</span> returns 28 if a=10 and b=5<p>
             </div>
             <div class="inputs">
                 <select name="functionButtons" class="dropdown" id="fncSelect">
                     <button><selectedcontent class="selectedcontent"></selectedcontent></button>
-                    <option value="F1"><span class="icon" aria-hidden="true">F1</span>
+                    <option value="fnc1"><span class="icon" aria-hidden="true">F1</span>
                     <span class="option-label">Function Button 1</span></option>
-                    <option value="F2"><span class="icon" aria-hidden="true">F2</span>
+                    <option value="fnc2"><span class="icon" aria-hidden="true">F2</span>
                     <span class="option-label">Function Button 2</span></option>
-                    <option value="F3"><span class="icon" aria-hidden="true">F3</span>
+                    <option value="fnc3"><span class="icon" aria-hidden="true">F3</span>
                     <span class="option-label">Function Button 3</span></option>
                 </select>
                 <textarea id="fncExpression" class="expression" placeholder="Expression" minlength="1"></textarea>
@@ -88,7 +89,7 @@
     </div>
 
     <div class="modal alert" id="alert">
-        <span class="alert icon">⁉</span>
+        <span id="alertIcon">⁉</span>
         <p id="alertText">Default Text</p>
         <button id="alertDismiss" data-action="dismiss">❌</button>
     </div>
