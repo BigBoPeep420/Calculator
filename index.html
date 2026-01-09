@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./styles/style.css">
-    <script src="./scripts/calc.js" defer></script>
+    <script type="module" src="./scripts/index.js" defer></script>
     <title>KOWLKULATER</title>
 </head>
 <body>
@@ -33,8 +33,8 @@
             <div class="keys">
                 <div class="leftBank">
                     <button class="key del" data-action="del">Del</button>
-                    <button class="key divide op" data-action="/">/</button>
-                    <button class="key multiply op" data-action="*">*</button>
+                    <button class="key / op" data-action="/">/</button>
+                    <button class="key * op" data-action="*">*</button>
                     <button class="key seven num" data-action="7">7</button>
                     <button class="key eight num" data-action="8">8</button>
                     <button class="key nine num" data-action="9">9</button>
@@ -50,7 +50,7 @@
                 <div class="rightBank">
                     <button class="key subtract op" data-action="-">-</button>
                     <button class="key add op" data-action="+">+</button>
-                    <button class="key equal" data-action="equal">=</button>
+                    <button class="key equal" data-action="=">=</button>
                 </div>
             </div>
         </div>
@@ -60,18 +60,18 @@
 
     <div class="modal fncEdit" id="fncEdit">
         <div class="fncEdit header">
-            <p class="title">Edit Custom Functions</p>
-            <button class="close" id="fncClose" data-action="closeFncEdit">&times;</button>
+            <p class="fncEdit title">Edit Custom Functions</p>
+            <button class="fncEdit close" id="fncClose" data-action="closeFncEdit">&times;</button>
         </div>
-        <div class="body">
-            <div class="information">
+        <div class="fncEdit body">
+            <div class="fncEdit information">
                     <p>Here you can enter your own custom expression and map it to one of the F buttons.<p>
                     <p>Your expression evaluates two variables (a and b) and returns a number.
                         Use standard operators and do not include a return statement. Use by pushing the corresponding
                         F button in place of an operator. There's a simple example below.<p>
-                    <p class="expressionExample"><span id="code">(a + 23) - b</span> returns 28 if a=10 and b=5<p>
+                    <p class="fncEdit expressionExample"><span id="code">(a + 23) - b</span> returns 28 if a=10 and b=5<p>
             </div>
-            <div class="inputs">
+            <div class="fncEdit inputs">
                 <select name="functionButtons" class="dropdown" id="fncSelect">
                     <button><selectedcontent class="selectedcontent"></selectedcontent></button>
                     <option value="fnc1"><span class="icon" aria-hidden="true">F1</span>
@@ -84,7 +84,7 @@
                 <textarea id="fncExpression" class="expression" placeholder="Expression" minlength="1"></textarea>
             </div>
         </div>
-        <div class="footer">
+        <div class="fncEdit footer">
             <button id="testExpression"><span>Test</span></button>
             <button class="submit" id="fncConfirm">Confirm</button>
         </div>
