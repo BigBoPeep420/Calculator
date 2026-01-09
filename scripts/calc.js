@@ -71,7 +71,7 @@ class Calculator{
                 this.clear();
                 return;
             default:
-                if(this.res !== null && isOp){
+                if(this.res != null && isOp){
                     this.iA = this.res.toString();
                     this.res = null;
                     this.iOp = action;
@@ -81,6 +81,13 @@ class Calculator{
                 }
                 if(this.res !== null && isNum) this.clear();
                 if(isOp){
+                    if(this.activeInput == 'iB'){
+                        this.calculate();
+                        this.iA = this.res; this.res = null;
+                        this.iOp = action;
+                        this.activeInput = 'iB';
+                        return;
+                    }
                     if (this.iA == '') this.iA = '0';
                     this.iOp = action;
                     this.activeInput = 'iB';
@@ -90,6 +97,7 @@ class Calculator{
                         if(this[this.activeInput].includes('.')) return;
                     }
                     if(this.activeInput == 'iOp') this.activeInput = 'iB';
+                    if(this.display.textContent.length > 13) return;
                     this[this.activeInput] += action;
                 }
                 this.updateDisplay();
@@ -106,7 +114,12 @@ class Calculator{
         if(this.iOp in this.methods) {
             result = this.methods[this.iOp](a, b);
             if(typeof result == 'number') result = Math.round(result * 10000000) / 10000000;
-            this.res = result;
+            const str = result.toString();
+            if(str.includes('e') || Math.abs(result) > 99999999999999){
+                this.res = "Err";
+            } else {
+                this.res = result;
+            }
             this.updateDisplay();
             this.iA = '';
             this.iB = '';
