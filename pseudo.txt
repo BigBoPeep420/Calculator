@@ -1,0 +1,42 @@
+CALL Calculator.input(action):
+    GET workingInput
+    IF action = .
+        IF workingInput != op THEN workingInput + .
+        updateDisplay()
+    IF action = num
+        IF workingInput != op THEN workingInput + action
+        updateDisplay()
+    IF action = operator OR fnc1 OR fnc2 OR fnc3
+        IF methods CONTAINS action THEN workingInput = action
+        updateDisplay()
+    IF action = fn THEN CALL onFn()
+    IF action = clr THEN CALL clear();
+    IF action = del THEN CALL delete();
+
+
+IF action == Num
+    IF state == res
+        clear()
+        state = iA
+        iA += INPUT
+    IF state == iOp THEN state = iB
+    this[state] += action
+ELSE IF action == Op
+    IF state == res
+        iA = res
+        iOp = action
+        this.iB = ''
+        this.res = ''
+        state = iOp
+    ELSE IF state == iA
+        iOp = action
+        state = iOp
+    ELSE IF state == iB
+        iA = calculate()
+        IF iA == 8008135
+            updateDisplay()
+
+    
+
+
+INPUT = Op
