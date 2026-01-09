@@ -56,6 +56,10 @@ class Calculator{
     input(action) {
         const isNum = !isNaN(action) || action == '.';
         const isOp = ['+', '-', '*', '/', 'fnc1', 'fnc2', 'fnc3'].contains(action);
+        if(action == 'fncEdit'){
+            this.onFn(true);
+            return;
+        }
         if(this.res !== null && isOp){
             this.iA = this.result.toString();
             this.res = null;
